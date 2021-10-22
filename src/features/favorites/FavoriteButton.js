@@ -1,4 +1,12 @@
 import { Transition } from '@headlessui/react';
+import {
+  infoNotification,
+  successNotification,
+} from 'features/notifications/notifications.model';
+import {
+  addNotification,
+  dismissNotification,
+} from 'features/notifications/notifications.slice';
 import React, { useEffect, useState } from 'react';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,11 +36,23 @@ const FavoriteButton = ({
 }) => {
   const dispatch = useDispatch();
   const isFavorite = useCheckFavorite(locationKey);
+
   const handleClick = () => {
     if (!locationKey) return;
-    if (!isFavorite)
-      dispatch(addFavorite({ key: locationKey, cityName, countryName }));
-    else dispatch(removeFavorite({ key: locationKey }));
+    if (!isFavorite) handleAdd();
+    else handleRemove();
+  };
+
+  const handleAdd = () => {
+    const message = `${cityName}, ${countryName} added to favorites`;
+    dispatch(addNotification(successNotification(message, 5000)));
+    dispatch(addFavorite({ key: locationKey, cityName, countryName }));
+  };
+
+  const handleRemove = () => {
+    const message = `${cityName}, ${countryName} added to favorites`;
+    dispatch(addNotification(infoNotification(message, 5000)));
+    dispatch(removeFavorite({ key: locationKey }));
   };
 
   return (

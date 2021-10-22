@@ -13,7 +13,7 @@ const FiveDayForcastInner = ({ dailyForecasts, days }) => {
           <FiveDaysTabs days={days} dailyForecasts={dailyForecasts} />
         </div>
       ) : (
-        <div className=" items-stretch flex space-x-5">
+        <div className="items-stretch flex space-x-2 xl:space-x-5">
           {dailyForecasts.map((weatherData, i) => (
             <SingleDayView
               key={weatherData.EpochDate}

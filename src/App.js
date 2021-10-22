@@ -1,4 +1,4 @@
-import Navbar from 'features/header/Navbar';
+import Navbar from 'features/navbar/Navbar';
 import Toast from 'features/notifications/Toast';
 import { useSetDefaultLocationByGEO } from 'hooks/reactQuery';
 import useDarkMode from 'hooks/useDarkMode';

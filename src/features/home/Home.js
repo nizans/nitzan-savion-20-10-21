@@ -30,7 +30,7 @@ const Home = () => {
       >
         <div className="w-full h-full bg-light-darker bg-opacity-50 dark:bg-dark-lighter dark:bg-opacity-50"></div>
       </div>
-      <div className="px-2 sm:px-10 z-10">
+      <div className="px-4 z-10">
         <div className="container mx-auto">
           <span className="flex w-full my-14">
             <SearchInput />

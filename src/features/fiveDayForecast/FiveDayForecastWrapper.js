@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import parseDateToDay from 'utils/parseDateToDay';
 import FiveDayForcastInner from './FiveDayForcastInner';
 import Spinner from 'features/UI/Spinner';
+import TLV from 'mock/tlv_forecast.json';
 
 const FiveDayForecastWrapper = () => {
   const {
@@ -14,9 +15,8 @@ const FiveDayForecastWrapper = () => {
     countryName,
     key: locationKey,
   } = useSelector(selectDefaultLocation);
-  const { data, isSuccess, isLoading, error } =
-    useFetchFiveDaysForecast(locationKey);
-
+  const { isSuccess, isLoading, error } = useFetchFiveDaysForecast(locationKey);
+  const data = TLV;
   return (
     <div className="w-full text-2xl xl:text-2xl 2xl:text-3xl flex flex-col ">
       <div className="flex justify-between text-black dark:text-white relative">

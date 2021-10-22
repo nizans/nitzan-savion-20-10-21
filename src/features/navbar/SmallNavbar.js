@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
-import ThemeButtons from './ThemeButtons';
+import ThemeButtons from '../theme/ThemeButtons';
 
 const SmallNavbar = ({ navigation }) => {
   return (
-    <Disclosure.Panel className="sm:hidden">
+    <Disclosure.Panel className="md:hidden">
       {({ close }) => (
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navigation.map((item) => (
@@ -21,7 +21,7 @@ const SmallNavbar = ({ navigation }) => {
               {item.name}
             </NavLink>
           ))}
-          <div>
+          <div className="flex justify-between">
             <ThemeButtons />
           </div>
         </div>

@@ -1,25 +1,29 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
 export const slice = createSlice({
-  name: 'errors',
+  name: 'notifications',
   initialState: {
-    errors: [],
+    items: [],
   },
   reducers: {
-    addError: (state, action) => {
-      state.errors.push(action.payload);
+    addNotification: (state, action) => {
+      state.items = [...state.items, action.payload];
     },
-    dismissError: (state, action) => {
-      state.errors = state.errors.filter((err) => err !== action.payload.errId);
+    dismissNotification: (state, action) => {
+      console.log(action.payload.id);
+      state.items = state.items.filter(
+        (notif) => notif.id !== action.payload.id
+      );
     },
-    clearErrors: (state) => {
-      state = [];
+    clearNotifications: (state) => {
+      state.items = [];
     },
   },
 });
 
-export const { addError, dismissError } = slice.actions;
+export const { addNotification, dismissNotification, clearNotifications } =
+  slice.actions;
 
-export const selectErrors = (state) => state.errors.errors;
+export const selectNotification = (state) => state.notifications.items;
 
 export default slice.reducer;

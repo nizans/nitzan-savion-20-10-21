@@ -1,11 +1,19 @@
 import { getWeatherIconURL } from 'constants/URLs';
+import useTemperatureString, {
+  getTempString,
+} from 'hooks/useTemperatureString';
+import useWindowDimensions from 'hooks/useWindowDimensions';
 import React from 'react';
 import checkIfDayTime from 'utils/checkIfDayTime';
 
 const SingleDayView = ({ weatherData, day }) => {
   const isDayTime = checkIfDayTime(weatherData.Sun.Rise, weatherData.Sun.Set);
+  const { width: windowWidth } = useWindowDimensions();
 
   const { Temperature: temp, RealFeelTemperature: feelsLike } = weatherData;
+
+  const [minTempStr] = useTemperatureString(temp.Minimum.Value);
+  const [maxTempStr] = useTemperatureString(temp.Maximum.Value);
   let phrase = weatherData.Day.LongPhrase;
   let iconSrc = getWeatherIconURL(weatherData.Day.Icon);
   if (!isDayTime) {
@@ -21,13 +29,14 @@ const SingleDayView = ({ weatherData, day }) => {
     let setTime = isDayTime
       ? new Date(weatherData.Sun.Set)
       : new Date(weatherData.Moon.Set);
-
     return (
       <h3>
-        <strong>{SunOrMoon} Time: </strong>
-        {riseTime.getHours() +
-          ':' +
-          ('0' + riseTime.getMinutes()).slice(-2)} -{' '}
+        <strong>
+          {windowWidth >= 1024 && windowWidth < 1280
+            ? SunOrMoon + ': '
+            : SunOrMoon + ' Time: '}
+        </strong>
+        {riseTime.getHours() + ':' + ('0' + riseTime.getMinutes()).slice(-2)} -{' '}
         {setTime.getHours() + ':' + ('0' + setTime.getMinutes()).slice(-2)}
       </h3>
     );
@@ -40,16 +49,21 @@ const SingleDayView = ({ weatherData, day }) => {
       <h1 className="text-xl font-light italic">{phrase}</h1>
       <div className="text-base">
         <h3>
-          <strong>Temperature: </strong>
-          <span className="">
-            {`${temp.Minimum.Value + temp.Minimum.Unit} -
-        ${temp.Maximum.Value + temp.Maximum.Unit}`}
-          </span>
+          <strong>
+            {windowWidth >= 1024 && windowWidth < 1280
+              ? 'Temp: '
+              : 'Temperature: '}
+          </strong>
+          <span className="">{`${minTempStr} - ${maxTempStr} `}</span>
         </h3>
         <h3>
-          <strong>Feels Like: </strong>
-          {`${feelsLike.Minimum.Value + feelsLike.Minimum.Unit} -
-        ${feelsLike.Maximum.Value + feelsLike.Maximum.Unit}`}
+          <strong>
+            {windowWidth >= 1024 && windowWidth < 1280
+              ? 'Feels: '
+              : 'Feels Like: '}
+          </strong>
+          {`${getTempString(feelsLike.Minimum.Value)} -
+        ${getTempString(feelsLike.Maximum.Value)}`}
         </h3>
         {getRiseToSetTimeString()}
       </div>
