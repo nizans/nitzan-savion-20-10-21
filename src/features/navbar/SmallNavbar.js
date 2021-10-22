@@ -14,14 +14,14 @@ const SmallNavbar = ({ navigation }) => {
               exact={item.exact}
               to={item.to}
               activeClassName="bg-primary"
-              className="px-3 py-2 rounded-md dark:text-white hover:bg-primary flex items-center"
+              className="px-3 py-2 rounded-md text-3xl dark:text-white hover:bg-primary flex items-center"
               onClick={close}
             >
               <span className="mr-4">{item.icon}</span>
               {item.name}
             </NavLink>
           ))}
-          <div className="flex justify-between">
+          <div className="flex justify-between px-4 py-4">
             <ThemeButtons />
           </div>
         </div>

@@ -5,8 +5,10 @@ import { useFetchLocationPhoto } from 'hooks/reactQuery';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import parseImageToSrc from 'utils/imageFromBlob';
+import { selectTheme } from 'features/theme/theme.slice';
 
 const Home = () => {
+  const { dark } = useSelector(selectTheme);
   const { cityName, countryName } = useSelector(selectDefaultLocation);
   const {
     data: imageBlob,
@@ -15,7 +17,7 @@ const Home = () => {
   } = useFetchLocationPhoto(cityName, countryName, 2560);
 
   return (
-    <div className="flex flex-col h-full bg-cover relative">
+    <div className="flex flex-col h-full  relative">
       <div
         className="absolute top-0 left-0 right-0 bottom-0 bg-cover "
         style={{
@@ -28,7 +30,14 @@ const Home = () => {
           transition: '1s filter linear',
         }}
       >
-        <div className="w-full h-full bg-light-darker bg-opacity-50 dark:bg-dark-lighter dark:bg-opacity-50"></div>
+        <div
+          className="w-full h-full "
+          style={{
+            background: dark
+              ? `linear-gradient(90deg, rgba(20,33,61,0.9) 0%, rgba(20,33,61,0.5) 30%, rgba(20,33,61,0.5) 70%, rgba(20,33,61,0.9) 100%)`
+              : `linear-gradient(90deg, rgba(229,229,229,0.9) 0%, rgba(229,229,229,0.5) 30%, rgba(229,229,229,0.5) 70%, rgba(229,229,229,0.9) 100%)`,
+          }}
+        ></div>
       </div>
       <div className="px-4 z-10">
         <div className="container mx-auto">

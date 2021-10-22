@@ -3,13 +3,13 @@ const GOOGLE_API_KEY = 'AIzaSyDpqwNPv7ZgeuidS9COJhuTovBuk5IVSRU';
 const PROXY_SERVER_PREFIX = 'https://ancient-meadow-61245.herokuapp.com/';
 const BLOCK_CONNECTION = ' XXX ';
 export const getCurrentConditionsURL = (locationKey) =>
-  `${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true`;
+  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true`;
 
 export const getFiveDayForcastURL = (locationKey, metric) =>
-  `${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=${metric}`;
+  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=${metric}`;
 
 export const getAutoCompleteURL = (searchStr) =>
-  `${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchStr}`;
+  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchStr}`;
 
 export const getWeatherIconURL = (iconNumber) =>
   `https://developer.accuweather.com/sites/default/files/${(
@@ -17,7 +17,7 @@ export const getWeatherIconURL = (iconNumber) =>
   ).slice(-2)}-s.png`;
 
 export const getGeoSearchURL = (lat, ion) =>
-  `${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${
+  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${
     lat + ', ' + ion
   }&details=true`;
 
