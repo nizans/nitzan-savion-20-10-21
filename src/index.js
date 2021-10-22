@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
-import './index.css';
+import 'assets/index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 

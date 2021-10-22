@@ -6,24 +6,29 @@ import {
   getGooglePlacePhotoURL,
   getGooglePlacesURL,
 } from 'constants/URLs';
+import { setDefaultLocation } from 'features/home/Home.slice';
 import { useEffect } from 'react';
 import { useQueries, useQuery, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
-import { setLocation } from 'store/defaultLocationSlice';
 import useCurrentLocation from './useCurrentLocation';
 
-const defualtQuerySettings = {};
-
 const defaultRequestOptions = {
-  mode: 'cors',
   method: 'GET',
   headers: new Headers({ 'Accept-Encoding': 'gzip' }),
+};
+
+const defaultQuerySettings = {
+  retry: 1,
+  staleTime: Infinity,
+  refetchInterval: 0,
+  cacheTime: Infinity,
 };
 
 export const useFetchMultipleCurrentConditions = (locationKeysArray) => {
   return useQueries(
     locationKeysArray.map((key) => {
       return {
+        ...defaultQuerySettings,
         queryKey: ['currentConditions', key],
         queryFn: () => _fetch(getCurrentConditionsURL(key)),
       };
@@ -34,25 +39,28 @@ export const useFetchMultipleCurrentConditions = (locationKeysArray) => {
 export const useGetCurrectCondotions = (locationKey) => {
   const queryClient = useQueryClient();
   return queryClient.getQueryState(['currentConditions', locationKey], {
+    ...defaultQuerySettings,
     exact: true,
   });
 };
 
-export const useFetchFiveDaysForecast = (locationKey, metric = true) =>
-  useQuery(
+export const useFetchFiveDaysForecast = (locationKey, metric = true) => {
+  return useQuery(
     ['fiveDaysForecast', locationKey],
     () => _fetch(getFiveDayForcastURL(locationKey, metric)),
-    defualtQuerySettings
+    { ...defaultQuerySettings, enabled: !!locationKey }
   );
+};
 
-export const useFetchSearchByCity = (cityName) =>
-  useQuery(
+export const useFetchSearchByCity = (cityName) => {
+  return useQuery(
     ['search', cityName],
     () => _fetch(getAutoCompleteURL(cityName)),
-    defualtQuerySettings
+    { ...defaultQuerySettings, enabled: cityName !== '' && cityName.length > 2 }
   );
+};
 
-export const useFetchByGEOLocation = () => {
+export const useSetDefaultLocationByGEO = () => {
   const dispatch = useDispatch();
   const { location } = useCurrentLocation();
   const { latitude, longitude } = location;
@@ -60,59 +68,66 @@ export const useFetchByGEOLocation = () => {
     ['search', latitude, longitude],
     () => _fetch(getGeoSearchURL(latitude, longitude)),
     {
-      ...defualtQuerySettings,
+      ...defaultQuerySettings,
       enabled: !!location.latitude && !!location.longitude,
     }
   );
-
   useEffect(() => {
     if (isSuccess && data) {
       const { Key, Country, EnglishName } = data;
       dispatch(
-        setLocation({
+        setDefaultLocation({
           key: Key,
           cityName: EnglishName,
           countryName: Country.EnglishName,
+          image: null,
         })
       );
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, dispatch]);
 };
 
 export const useFetchLocationPhoto = (
   cityName,
   countryName,
-  maxWidth = 1024
+  maxWidth = 3840
 ) => {
-  const { data: place, error } = useQuery(
+  const { data: place } = useQuery(
     ['googlePlace', cityName, countryName],
-    () =>
-      _fetch(getGooglePlacesURL(cityName + ' ' + countryName), {
-        ...defaultRequestOptions,
-      })
+    () => _fetch(getGooglePlacesURL(cityName + ' ' + countryName)),
+    defaultQuerySettings
   );
 
   const photoRef = place?.candidates[0]?.photos[0].photo_reference;
-
-  return useQuery(
-    ['photo', photoRef],
+  const queryResult = useQuery(
+    ['photo', cityName, countryName],
     () => _fetch(getGooglePlacePhotoURL(photoRef, maxWidth)),
-    { ...defualtQuerySettings, enabled: !!photoRef }
+    {
+      ...defaultQuerySettings,
+      enabled: !!photoRef,
+    }
   );
+
+  return queryResult;
 };
 
 const _fetch = async (url, options = defaultRequestOptions) => {
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      console.log(response.status);
-      throw new Error('Error while fetching data...');
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    let error;
+    if (response.headers.get('Content-Type') === 'application/json') {
+      const serverError = await response.json();
+      error = Error(serverError);
     }
-    if (response.status === 204) return;
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
+    error = Error('Error while fetching data...');
     throw error;
   }
+
+  if (response.headers.get('Content-Type') === 'image/jpeg')
+    return await response.blob();
+
+  if (response.status === 204) return;
+
+  return await response.json();
 };

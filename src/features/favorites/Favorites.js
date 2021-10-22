@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { selectFavorites } from './Favorites.slice';
-import FavoriteLocationCard from '../../components/FavoriteLocationCard/FavoriteLocationCard';
+import FavoriteLocationCard from 'features/favorites/FavoriteLocationCard';
 import { useFetchMultipleCurrentConditions } from 'hooks/reactQuery';
-import Divider from 'components/UI/Divider';
+import Divider from 'features/UI/Divider';
+
 const Favorites = () => {
   const favoritesKeys = useSelector(selectFavorites);
 
@@ -10,9 +11,11 @@ const Favorites = () => {
 
   if (favoritesKeys.length === 0) return <h1>No favorites</h1>;
   return (
-    <div className="my-14">
-      <div className="font-bold">My Favorites Locations:</div>
-      <Divider />
+    <div className=" mx-auto container py-14 px-2 ">
+      <div className="font-bold text-black dark:text-white text-2xl xl:text-2xl 2xl:text-3xl">
+        My Favorites Locations:
+      </div>
+      <Divider className="my-8 divide-primary" />
       <div className="flex flex-col flex-wrap sm:flex-row justify-center items-center gap-10 ">
         {favoritesKeys.map((fav, i) => (
           <FavoriteLocationCard

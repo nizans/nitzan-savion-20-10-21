@@ -13,8 +13,8 @@ const FiveDaysTabs = ({ days, dailyForecasts, isDetailedView = false }) => {
             className={({ selected }) =>
               `w-full py-2 rounded-lg focus:ring-2 focus:ring-blue-500  ${
                 selected
-                  ? 'bg-blue-400 shadow text-white'
-                  : 'text-blue-600 hover:bg-white/[0.12] '
+                  ? 'bg-black bg-opacity-50 shadow text-white'
+                  : 'text-white hover:bg-white/[0.12] '
               }`
             }
           >

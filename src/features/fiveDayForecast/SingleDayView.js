@@ -34,8 +34,8 @@ const SingleDayView = ({ weatherData, day }) => {
   };
 
   return (
-    <div className="border rounded-md flex flex-col justify-between p-4 w-full">
-      <h3 className="text-base font-bold">{day.full}</h3>
+    <div className="border rounded-md flex flex-col justify-between p-4 w-full text-white bg-black bg-opacity-50 ">
+      <h3 className="text-base font-bold ">{day.full}</h3>
       <img src={iconSrc} width="150px" alt="" className="mx-auto" />
       <h1 className="text-xl font-light italic">{phrase}</h1>
       <div className="text-base">

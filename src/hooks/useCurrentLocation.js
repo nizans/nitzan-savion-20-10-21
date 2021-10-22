@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const options = {
   enableHighAccuracy: false,
@@ -27,7 +27,7 @@ const useCurrentLocation = () => {
       },
       options
     );
-  }, [options]);
+  }, []);
 
   return { location, error };
 };

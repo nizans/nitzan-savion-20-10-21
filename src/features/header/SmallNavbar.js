@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Disclosure } from '@headlessui/react';
+import ThemeButtons from './ThemeButtons';
 
 const SmallNavbar = ({ navigation }) => {
   return (
@@ -12,25 +13,17 @@ const SmallNavbar = ({ navigation }) => {
               key={item.to}
               exact={item.exact}
               to={item.to}
-              activeClassName="bg-gray-900 text-white"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              activeClassName="bg-primary"
+              className="px-3 py-2 rounded-md dark:text-white hover:bg-primary flex items-center"
               onClick={close}
             >
+              <span className="mr-4">{item.icon}</span>
               {item.name}
             </NavLink>
           ))}
-          <span className="text-gray-300 px-3 py-2 flex justify-between w-full">
-            <label>Set Unit:</label>
-            <button className="ml-auto px-4 border border-white rounded-md">
-              F
-            </button>
-          </span>
-          <span className="text-gray-300 px-3 py-2 flex justify-between w-full">
-            <label>Set Theme:</label>
-            <button className="ml-auto px-4 border border-white rounded-md">
-              DARK
-            </button>
-          </span>
+          <div>
+            <ThemeButtons />
+          </div>
         </div>
       )}
     </Disclosure.Panel>

@@ -6,10 +6,12 @@ export const slice = createSlice({
     location: { key: 215854, cityName: 'Tel Aviv', countryName: 'Israel' },
   },
   reducers: {
-    setLocation: (state, newLocation) => (state = newLocation),
+    setDefaultLocation: (state, action) => {
+      state.location = action.payload;
+    },
   },
 });
 
-export const { setLocation } = slice.actions;
+export const { setDefaultLocation } = slice.actions;
 export const selectDefaultLocation = (state) => state.defaultLocation.location;
 export default slice.reducer;
