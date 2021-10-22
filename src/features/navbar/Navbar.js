@@ -10,7 +10,7 @@ const Navbar = () => {
     <>
       <Disclosure
         as="nav"
-        className="bg-light-darker dark:bg-dark fixed w-full top-0 z-50 "
+        className="bg-light-darker dark:bg-dark fixed w-full top-0 z-50 shadow-xl"
       >
         {({ open }) => (
           <>
@@ -20,9 +20,15 @@ const Navbar = () => {
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md dark:text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
-                      <XIcon className="block h-6 w-6" aria-hidden="true" />
+                      <XIcon
+                        className="block h-6 w-6 text-primary"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                      <MenuIcon
+                        className="block h-6 w-6 text-primary"
+                        aria-hidden="true"
+                      />
                     )}
                   </Disclosure.Button>
                 </div>
@@ -54,7 +60,6 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-
             <SmallNavbar navigation={navigation} />
           </>
         )}

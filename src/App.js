@@ -2,12 +2,11 @@ import Navbar from 'features/navbar/Navbar';
 import Toast from 'features/notifications/Toast';
 import { useSetDefaultLocationByGEO } from 'hooks/reactQuery';
 import useDarkMode from 'hooks/useDarkMode';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from 'routes/AppRoutes';
 
 //TODO -- ERRORS HANDLING
-//TODO -- IMAGE !
 
 function App() {
   useSetDefaultLocationByGEO();

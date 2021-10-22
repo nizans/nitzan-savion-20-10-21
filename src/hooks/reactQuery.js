@@ -6,6 +6,7 @@ import {
   getGooglePlacePhotoURL,
   getGooglePlacesURL,
 } from 'constants/URLs';
+
 import { setDefaultLocation } from 'features/home/Home.slice';
 import { useEffect } from 'react';
 import { useQueries, useQuery, useQueryClient } from 'react-query';
@@ -39,7 +40,6 @@ export const useFetchMultipleCurrentConditions = (locationKeysArray) => {
 export const useGetCurrectCondotions = (locationKey) => {
   const queryClient = useQueryClient();
   return queryClient.getQueryState(['currentConditions', locationKey], {
-    ...defaultQuerySettings,
     exact: true,
   });
 };
