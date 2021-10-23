@@ -1,21 +1,24 @@
-const { createSlice } = require('@reduxjs/toolkit');
+const { createSlice } = require("@reduxjs/toolkit");
 
 export const slice = createSlice({
-  name: 'theme',
+  name: "theme",
   initialState: {
     dark: true,
     celsius: true,
   },
   reducers: {
-    toggleDarkMode: (state) => {
+    toggleDarkMode: state => {
       state.dark = !state.dark;
     },
-    toggleCelsius: (state) => {
+    toggleCelsius: state => {
       state.celsius = !state.celsius;
+    },
+    setTheme: (state, action) => {
+      state = action.payload;
     },
   },
 });
 
-export const { toggleDarkMode, toggleCelsius } = slice.actions;
-export const selectTheme = (state) => state.theme;
-export default slice.reducer;
+export const { toggleDarkMode, toggleCelsius, setTheme } = slice.actions;
+export const selectTheme = state => state.theme;
+export default slice;

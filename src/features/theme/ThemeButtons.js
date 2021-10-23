@@ -1,18 +1,8 @@
-import {
-  selectTheme,
-  toggleCelsius,
-  toggleDarkMode,
-} from 'features/theme/theme.slice';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  RiCelsiusFill,
-  RiFahrenheitFill,
-  RiSunFill,
-  RiMoonFill,
-} from 'react-icons/ri';
-
-import IconSwitchButton from './IconSwitchButton';
+import { selectTheme, toggleCelsius, toggleDarkMode } from "features/theme/theme.slice";
+import React, { useState } from "react";
+import { RiCelsiusFill, RiFahrenheitFill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import IconSwitchButton from "./IconSwitchButton";
 
 const ThemeButtons = () => {
   const theme = useSelector(selectTheme);
@@ -33,16 +23,14 @@ const ThemeButtons = () => {
   return (
     <div className="flex items-center justify-between space-x-2 w-full">
       <IconSwitchButton
-        LeftIconComponent={
-          <RiFahrenheitFill className="text-primary h-8 w-8 " />
-        }
+        LeftIconComponent={<RiFahrenheitFill className="text-primary h-8 w-8 " />}
         RightIconComponent={<RiCelsiusFill className="h-8 w-8 text-primary" />}
         checkedValue={isCelsius}
         onChangeHandler={handleUnitTypeClick}
       />
       <IconSwitchButton
-        LeftIconComponent={<RiSunFill className="text-primary h-8 w-8 " />}
-        RightIconComponent={<RiMoonFill className="h-8 w-8 text-primary" />}
+        LeftIconComponent={<p className="text-3xl h-8">&#127774;</p>}
+        RightIconComponent={<p className="text-3xl h-8">&#127771;</p>}
         checkedValue={isDarkMode}
         onChangeHandler={handleDarkModeClick}
       />

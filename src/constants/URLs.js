@@ -1,28 +1,27 @@
-const API_KEY = 'Ta2A30OlXxtpBaUtd0YGnimUsuodaGs7';
-const GOOGLE_API_KEY = 'AIzaSyDpqwNPv7ZgeuidS9COJhuTovBuk5IVSRU';
-const PROXY_SERVER_PREFIX = 'https://ancient-meadow-61245.herokuapp.com/';
-const BLOCK_CONNECTION = ' XXX ';
-export const getCurrentConditionsURL = (locationKey) =>
-  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}&details=true`;
+import { ACCU_API_KEY, GOOGLE_API_KEY, PROXY_SERVER_PREFIX } from "./vars";
 
-export const getFiveDayForcastURL = (locationKey, metric) =>
-  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}&details=true&metric=${metric}`;
+const ACCU_BASE_URL = "https://dataservice.accuweather.com/";
+const GOOGLE_PLACE_BASE_URL = "https://maps.googleapis.com/maps/api/place/";
 
-export const getAutoCompleteURL = (searchStr) =>
-  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchStr}`;
+const URLs = {
+  getCurrentConditionsURL: locationKey =>
+    `${PROXY_SERVER_PREFIX}${ACCU_BASE_URL}currentconditions/v1/${locationKey}?apikey=${ACCU_API_KEY}&details=true`,
 
-export const getWeatherIconURL = (iconNumber) =>
-  `https://developer.accuweather.com/sites/default/files/${(
-    '0' + iconNumber
-  ).slice(-2)}-s.png`;
+  getFiveDayForcastURL: (locationKey, metric) =>
+    `${PROXY_SERVER_PREFIX}${ACCU_BASE_URL}forecasts/v1/daily/5day/${locationKey}?apikey=${ACCU_API_KEY}&details=true&metric=${metric}`,
 
-export const getGeoSearchURL = (lat, ion) =>
-  `${BLOCK_CONNECTION} ${PROXY_SERVER_PREFIX}http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${
-    lat + ', ' + ion
-  }&details=true`;
+  getAutoCompleteURL: searchStr => `${PROXY_SERVER_PREFIX}${ACCU_BASE_URL}locations/v1/cities/autocomplete?apikey=${ACCU_API_KEY}&q=${searchStr}`,
 
-export const getGooglePlacesURL = (input) =>
-  `${PROXY_SERVER_PREFIX}https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${input}&inputtype=textquery&fields=photos&key=${GOOGLE_API_KEY}`;
+  getWeatherIconURL: iconNumber => `https://developer.accuweather.com/sites/default/files/${("0" + iconNumber).slice(-2)}-s.png`,
 
-export const getGooglePlacePhotoURL = (photoRef, maxWidth) =>
-  `${PROXY_SERVER_PREFIX}https://maps.googleapis.com/maps/api/place/photo?key=${GOOGLE_API_KEY}&photo_reference=${photoRef}&maxwidth=${maxWidth}`;
+  getGeoSearchURL: (lat, ion) =>
+    `${PROXY_SERVER_PREFIX}${ACCU_BASE_URL}locations/v1/cities/geoposition/search?apikey=${ACCU_API_KEY}&q=${lat + ", " + ion}&details=true`,
+
+  getGooglePlacesURL: input =>
+    `${PROXY_SERVER_PREFIX}${GOOGLE_PLACE_BASE_URL}findplacefromtext/json?input=${input}&inputtype=textquery&fields=photos&key=${GOOGLE_API_KEY}`,
+
+  getGooglePlacePhotoURL: (photoRef, maxWidth) =>
+    `${PROXY_SERVER_PREFIX}${GOOGLE_PLACE_BASE_URL}photo?key=${GOOGLE_API_KEY}&photo_reference=${photoRef}&maxwidth=${maxWidth}`,
+};
+
+export default URLs;

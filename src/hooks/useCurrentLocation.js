@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const options = {
-  enableHighAccuracy: false,
+  enableHighAccuracy: true,
   timeout: 1000 * 60 * 1,
   maximumAge: 1000 * 3600 * 3,
 };
@@ -12,17 +12,17 @@ const useCurrentLocation = () => {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setError('Geolocation is not supported.');
+      setError("Geolocation is not supported.");
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         const { coords } = position;
         const { latitude, longitude } = coords;
         setLocation({ latitude, longitude });
       },
-      (error) => {
+      error => {
         setError(error);
       },
       options

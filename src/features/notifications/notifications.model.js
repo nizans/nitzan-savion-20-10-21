@@ -1,23 +1,23 @@
-export const errorNotification = (message, autoDismiss = -1) => ({
+export const errorNotification = (description, autoDismiss = -1, title = "Error") => ({
   id: (Math.random() + 1).toString(36).substring(7),
-  title: 'Error',
-  message: message,
-  backgroundColor: '#d9534f',
-  autoDismiss: autoDismiss,
+  backgroundColor: "#d9534f",
+  title,
+  description,
+  autoDismiss,
 });
 
-export const infoNotification = (message, autoDismiss = -1) => ({
+export const infoNotification = (description, autoDismiss = -1, title = "Info") => ({
   id: (Math.random() + 1).toString(36).substring(7),
-  title: 'Info',
-  description: message,
-  backgroundColor: '#FCA311',
-  autoDismiss: autoDismiss,
+  backgroundColor: "#FCA311",
+  title,
+  description,
+  autoDismiss,
 });
 
-export const successNotification = (message, autoDismiss = -1) => ({
+export const successNotification = (description, autoDismiss = -1, title = "Success") => ({
   id: (Math.random() + 1).toString(36).substring(7),
-  title: 'Success',
-  description: message,
-  backgroundColor: '#5cb85c',
-  autoDismiss: autoDismiss,
+  backgroundColor: "#5cb85c",
+  title,
+  description,
+  autoDismiss,
 });

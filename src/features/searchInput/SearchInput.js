@@ -1,5 +1,5 @@
 import Spinner from 'features/UI/Spinner';
-import { useFetchSearchByCity } from 'hooks/reactQuery';
+import { useFetchSearchByCity } from 'lib/reactQuery/query.hooks';
 import useDebounce from 'hooks/useDebounce';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import autoMOCK from 'mock/autocomple.json';

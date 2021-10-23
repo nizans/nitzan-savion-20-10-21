@@ -1,7 +1,7 @@
 import FavoriteButton from 'features/favorites/FavoriteButton';
 import Divider from 'features/UI/Divider';
 import { selectDefaultLocation } from 'features/home/Home.slice';
-import { useFetchFiveDaysForecast } from 'hooks/reactQuery';
+import { useFetchFiveDaysForecast } from 'lib/reactQuery/query.hooks';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import parseDateToDay from 'utils/parseDateToDay';

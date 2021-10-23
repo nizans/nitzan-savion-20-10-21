@@ -1,7 +1,7 @@
-const { createSlice } = require('@reduxjs/toolkit');
+const { createSlice } = require("@reduxjs/toolkit");
 
 export const slice = createSlice({
-  name: 'notifications',
+  name: "notifications",
   initialState: {
     items: [],
   },
@@ -10,20 +10,16 @@ export const slice = createSlice({
       state.items = [...state.items, action.payload];
     },
     dismissNotification: (state, action) => {
-      console.log(action.payload.id);
-      state.items = state.items.filter(
-        (notif) => notif.id !== action.payload.id
-      );
+      state.items = state.items.filter(notif => notif.id !== action.payload.id);
     },
-    clearNotifications: (state) => {
+    clearNotifications: state => {
       state.items = [];
     },
   },
 });
 
-export const { addNotification, dismissNotification, clearNotifications } =
-  slice.actions;
+export const { addNotification, dismissNotification, clearNotifications } = slice.actions;
 
-export const selectNotification = (state) => state.notifications.items;
+export const selectNotification = state => state.notifications.items;
 
-export default slice.reducer;
+export default slice;

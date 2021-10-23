@@ -1,13 +1,15 @@
-import { useSelector } from 'react-redux';
-import { selectTheme } from 'features/theme/theme.slice';
-import { useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { selectTheme } from "features/theme/theme.slice";
+import { useEffect } from "react";
 
 const useDarkMode = () => {
   const { dark } = useSelector(selectTheme);
-  const html = document.querySelector('html');
+  const html = document.querySelector("html");
+
   useEffect(() => {
-    if (dark) html.classList.add('dark');
-    else html.classList.remove('dark');
+    if (dark) html.classList.add("dark");
+    else html.classList.remove("dark");
+    // eslint-disable-next-line
   }, [dark]);
 };
 

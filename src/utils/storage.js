@@ -1,12 +1,17 @@
+const L_STORAGE_PREFIX = "herolo_task_";
 const storage = {
-  get: (key) => {
-    return JSON.parse(window.localStorage.getItem(key));
+  has: key => {
+    return !(window.localStorage.getItem(L_STORAGE_PREFIX + key) === null);
+  },
+  get: key => {
+    const value = JSON.parse(window.localStorage.getItem(L_STORAGE_PREFIX + key));
+    return value || undefined;
   },
   set: (key, value) => {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(L_STORAGE_PREFIX + key, JSON.stringify(value));
   },
-  clear: (key) => {
-    window.localStorage.removeItem(key);
+  clear: key => {
+    window.localStorage.removeItem(L_STORAGE_PREFIX + key);
   },
 };
 

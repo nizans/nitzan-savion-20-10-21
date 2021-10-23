@@ -1,20 +1,18 @@
-import { Tab } from '@headlessui/react';
-import React from 'react';
-import SingleDayDetailedView from './SingleDayDetailedView';
-import SingleDayView from './SingleDayView';
+import { Tab } from "@headlessui/react";
+import React from "react";
 
-const FiveDaysTabs = ({ days, dailyForecasts, isDetailedView = false }) => {
+import SingleDayCard from "./SingleDayCard";
+
+const FiveDaysTabs = ({ days, dailyForecasts }) => {
   return (
     <Tab.Group>
       <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-        {days.map((day) => (
+        {days.map(day => (
           <Tab
             key={day.full}
             className={({ selected }) =>
               `w-full py-2 rounded-lg focus:ring-2 focus:ring-blue-500  ${
-                selected
-                  ? 'bg-black bg-opacity-50 shadow text-white'
-                  : 'text-white hover:bg-white/[0.12] '
+                selected ? "bg-black bg-opacity-50 shadow text-white" : "text-white hover:bg-white/[0.12] "
               }`
             }
           >
@@ -26,11 +24,7 @@ const FiveDaysTabs = ({ days, dailyForecasts, isDetailedView = false }) => {
       <Tab.Panels>
         {dailyForecasts.map((weatherData, i) => (
           <Tab.Panel key={weatherData.EpochDate}>
-            {isDetailedView ? (
-              <SingleDayDetailedView weatherData={weatherData} day={days[i]} />
-            ) : (
-              <SingleDayView weatherData={weatherData} day={days[i]} />
-            )}
+            <SingleDayCard weatherData={weatherData} day={days[i]} />
           </Tab.Panel>
         ))}
       </Tab.Panels>

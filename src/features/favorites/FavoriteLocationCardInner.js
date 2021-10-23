@@ -1,23 +1,18 @@
-import React from 'react';
-import { getWeatherIconURL } from 'constants/URLs';
+import React from "react";
+import URLs from "constants/URLs";
+import useTemperatureString from "hooks/useTemperatureString";
 
-const FavoriteLocationCardInner = ({ locationData, cityName, countryName }) => {
-  const { WeatherIcon, Temperature, WeatherText, RealFeelTemperature } =
-    locationData;
+const FavoriteLocationCardInner = ({ locationData }) => {
+  const { WeatherIcon, Temperature, WeatherText, RealFeelTemperature } = locationData;
+  const [temp] = useTemperatureString(Temperature.Metric.Value);
+  const [feelsLikeTemp] = useTemperatureString(RealFeelTemperature.Metric.Value);
+
   return (
     <>
-      <img
-        className="mx-auto"
-        width="125px"
-        src={getWeatherIconURL(WeatherIcon)}
-        alt=""
-      />
-      <h1 className="text-5xl">{Temperature.Metric.Value + 'C'}</h1>
+      <img className="mx-auto" width="125px" src={URLs.getWeatherIconURL(WeatherIcon)} alt="" />
+      <h1 className="text-5xl">{temp}</h1>
       <h3>{WeatherText}</h3>
-      <h3>Feels Like: {RealFeelTemperature.Metric.Value + 'C'}</h3>
-      <button className="mt-auto border border-white py-2 bg-black bg-opacity-50 hover:bg-opacity-100 rounded-md">
-        5-Day forecast
-      </button>
+      <h3>Feels Like: {feelsLikeTemp}</h3>
     </>
   );
 };

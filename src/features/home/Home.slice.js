@@ -14,4 +14,4 @@ export const slice = createSlice({
 
 export const { setDefaultLocation } = slice.actions;
 export const selectDefaultLocation = (state) => state.defaultLocation.location;
-export default slice.reducer;
+export default slice;

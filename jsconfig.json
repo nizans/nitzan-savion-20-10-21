@@ -1,5 +1,5 @@
 {
   "compilerOptions": { "baseUrl": "src" },
-  "include": ["src", "craco.config.js", "tailwind.config.js"],
+  "include": ["src", "craco.config.js", "tailwind.config.js", "package.json"],
   "exclude": ["node_modules", "**/node_modules/*", "build"]
 }

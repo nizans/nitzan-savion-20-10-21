@@ -1,14 +1,14 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Disclosure } from '@headlessui/react';
-import ThemeButtons from '../theme/ThemeButtons';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Disclosure } from "@headlessui/react";
+import ThemeButtons from "../theme/ThemeButtons";
 
 const SmallNavbar = ({ navigation }) => {
   return (
-    <Disclosure.Panel className="md:hidden">
+    <Disclosure.Panel  className="md:hidden">
       {({ close }) => (
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {navigation.map((item) => (
+          {navigation.map(item => (
             <NavLink
               key={item.to}
               exact={item.exact}
