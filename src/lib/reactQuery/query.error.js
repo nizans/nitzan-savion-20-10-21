@@ -2,8 +2,8 @@ import { store } from "store/store";
 import { errorNotification } from "features/notifications/notifications.model";
 
 const getErrorTitle = queryKey => {
-  if (queryKey[0] === "ACCU") return "Weather data error";
-  if (queryKey[0] === "GOOGLE") return "Error getting image";
+  if (queryKey === "ACCU") return "Weather data error";
+  if (queryKey === "GOOGLE") return "Error getting image";
   return "Network error";
 };
 

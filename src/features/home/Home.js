@@ -1,5 +1,5 @@
 import FiveDayForecastWrapper from "features/fiveDayForecast/FiveDayForecastWrapper";
-import { selectDefaultLocation } from "features/home/Home.slice";
+import { selectDefaultLocation } from "features/fiveDayForecast/defaultLocation.slice";
 import SearchInput from "features/searchInput/SearchInput";
 import { selectTheme } from "features/theme/theme.slice";
 import { useFetchLocationPhoto } from "lib/reactQuery/query.hooks";
@@ -10,15 +10,15 @@ import parseImageToSrc from "utils/imageFromBlob";
 const Home = () => {
   const { dark } = useSelector(selectTheme);
   const { cityName, countryName } = useSelector(selectDefaultLocation);
-  const { data: imageBlob, isSuccess, isLoading } = useFetchLocationPhoto(cityName, countryName);
+  const { data: imageBlob, isSuccess } = useFetchLocationPhoto(cityName, countryName);
 
   return (
     <div className="flex flex-col h-full  relative">
       <div
         className="absolute top-0 left-0 right-0 bottom-0 bg-cover "
         style={{
-          backgroundImage: isLoading ? "url(https://placeimg.com/124/124/nature)" : isSuccess ? "url(" + parseImageToSrc(imageBlob) + ")" : "",
-          filter: isLoading ? "blur(100px)" : "blur(0px)",
+          backgroundImage: isSuccess ? "url(" + parseImageToSrc(imageBlob) + ")" : "url(https://placeimg.com/124/124/nature)",
+          filter: !isSuccess ? "blur(100px)" : "blur(0px)",
           transition: "1s filter linear",
         }}
       >

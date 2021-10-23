@@ -5,8 +5,7 @@ import useDarkMode from "hooks/useDarkMode";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "routes/AppRoutes";
-
-//TODO -- ERRORS HANDLING
+import { USE_MOCK } from "constants/vars";
 
 function App() {
   useSetDefaultLocationByGEO();
@@ -21,6 +20,11 @@ function App() {
           <Notifications />
         </div>
       </div>
+      {USE_MOCK && (
+        <span className="fixed bottom-0 left-0 right-0 bg-gray-500 text-center">
+          Using mock weather data. Remove USE_MOCK env var to fetch from API.
+        </span>
+      )}
     </Router>
   );
 }

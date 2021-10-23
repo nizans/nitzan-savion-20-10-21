@@ -1,8 +1,8 @@
 import FavoriteButton from "features/favorites/FavoriteButton";
-import { selectDefaultLocation } from "features/home/Home.slice";
+import { selectDefaultLocation } from "features/fiveDayForecast/defaultLocation.slice";
 import Divider from "features/UI/Divider";
 import Spinner from "features/UI/Spinner";
-import { useFetchFiveDaysForecast } from "lib/reactQuery/query.hooks";
+import { useFetchForecast } from "lib/reactQuery/query.hooks";
 import React from "react";
 import { useSelector } from "react-redux";
 import parseDateToDay from "utils/parseDateToDay";
@@ -11,7 +11,7 @@ import FiveDayForcastInner from "./FiveDayForcastInner";
 const FiveDayForecastWrapper = () => {
   const { cityName, countryName, key: locationKey } = useSelector(selectDefaultLocation);
 
-  const { data, isSuccess, isLoading, error } = useFetchFiveDaysForecast(locationKey);
+  const { data, isSuccess, isLoading, error } = useFetchForecast(locationKey);
 
   const headline = isSuccess ? data?.Headline?.Text : isLoading ? "Loading.." : error ? "Unavailable" : "";
   return (

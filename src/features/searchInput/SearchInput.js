@@ -1,9 +1,10 @@
+import { USE_MOCK } from "constants/vars";
 import { infoNotification } from "features/notifications/notifications.model";
 import { addNotification, selectNotification } from "features/notifications/notifications.slice";
 import Spinner from "features/UI/Spinner";
 import useDebounce from "hooks/useDebounce";
 import useWindowDimensions from "hooks/useWindowDimensions";
-import { useFetchSearchByCity } from "lib/reactQuery/query.hooks";
+import { useFetchAutocomplete } from "lib/reactQuery/query.hooks";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SearchInputSuggestions from "./SearchInputSuggestions";
@@ -13,7 +14,7 @@ const SearchInput = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value, 300);
-  const { data, isLoading, isSuccess } = useFetchSearchByCity(debouncedValue);
+  const { data, isLoading, isSuccess } = useFetchAutocomplete(debouncedValue);
   const { width: windowWidth } = useWindowDimensions();
 
   const handleInvalidInput = () => {
@@ -36,7 +37,10 @@ const SearchInput = () => {
         className="w-full border-r text-xl xl:text-2xl 2xl:text-4xl pl-2 py-1 outline-none "
       />
       <label></label>
-      {isSuccess && <SearchInputSuggestions data={data} />}
+
+      {USE_MOCK && value.length > 2 && <SearchInputSuggestions data={data} />}
+      {!USE_MOCK && isSuccess && <SearchInputSuggestions data={data} />}
+
       <span className="p-2 border-l-2 bg-gray-100 border-primary flex items-center">
         <Spinner
           size={windowWidth < 1280 ? "1.25rem" : windowWidth < 1280 ? "1.5rem" : "2.25rem"}

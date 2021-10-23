@@ -2,7 +2,6 @@ import { ACCU_API_KEY, GOOGLE_API_KEY, PROXY_SERVER_PREFIX } from "./vars";
 
 const ACCU_BASE_URL = "https://dataservice.accuweather.com/";
 const GOOGLE_PLACE_BASE_URL = "https://maps.googleapis.com/maps/api/place/";
-
 const URLs = {
   getCurrentConditionsURL: locationKey =>
     `${PROXY_SERVER_PREFIX}${ACCU_BASE_URL}currentconditions/v1/${locationKey}?apikey=${ACCU_API_KEY}&details=true`,

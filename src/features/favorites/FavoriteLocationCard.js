@@ -1,13 +1,12 @@
-import { useFetchLocationPhoto, useGetCurrectConditions } from "lib/reactQuery/query.hooks";
-import parseImageToSrc from "utils/imageFromBlob";
 import FavoriteButton from "features/favorites/FavoriteButton";
-import FavoriteLocationCardInner from "./FavoriteLocationCardInner";
+import { setDefaultLocation } from "features/fiveDayForecast/defaultLocation.slice";
 import Spinner from "features/UI/Spinner";
+import { useFetchLocationPhoto, useGetCurrectConditions } from "lib/reactQuery/query.hooks";
 import { useDispatch } from "react-redux";
-import { setDefaultLocation } from "features/home/Home.slice";
-import { ROUTE_PREFIX } from "routes/AppRoutes";
 import { useHistory } from "react-router";
-import { useRef } from "react";
+import { ROUTE_PREFIX } from "routes/AppRoutes";
+import parseImageToSrc from "utils/imageFromBlob";
+import FavoriteLocationCardInner from "./FavoriteLocationCardInner";
 
 const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
   const { data: locationData, status } = useGetCurrectConditions(locationKey);
@@ -25,7 +24,7 @@ const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
       style={{
         backgroundImage: isSuccess && "url(" + parseImageToSrc(imageBlob) + ")",
       }}
-      className="w-56 h-80 border rounded-md border-dark-lighter bg-cover relative"
+      className="w-56 h-80 border rounded-md border-dark-lighter dark:bg-light-darker bg-cover relative"
     >
       <div
         className="absolute top-0 left-0 right-0 bottom-0 bg-dark-lighter bg-opacity-50 hover:bg-opacity-20 p-4 text-white cursor-pointer"

@@ -3,7 +3,7 @@ import favoritesSlice from "features/favorites/Favorites.slice";
 import notificationsSlice from "features/notifications/notifications.slice";
 import themeSlice from "features/theme/theme.slice";
 import storage from "utils/storage";
-import defaultLocationSlice from "../features/home/Home.slice";
+import defaultLocationSlice from "../features/fiveDayForecast/defaultLocation.slice";
 
 export const store = configureStore({
   preloadedState: storage.get("state"),

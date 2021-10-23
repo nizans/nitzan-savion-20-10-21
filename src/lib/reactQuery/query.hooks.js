@@ -1,15 +1,19 @@
 import URLs from "constants/URLs";
-import { setDefaultLocation } from "features/home/Home.slice";
+import { setDefaultLocation } from "features/fiveDayForecast/defaultLocation.slice";
 import { _fetch } from "lib/reactQuery/query.function";
 import { QUERY_KEYS } from "lib/reactQuery/query.keys";
 import { defaultQuerySettings } from "lib/reactQuery/query.settings";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQueries, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
-import useCurrentLocation from "hooks/useCurrentLocation";
-import TLV_FORECAST_MOCK from "mock/tlv_forecast.json";
 import { USE_MOCK } from "constants/vars";
-import TLV_NOW from "mock/tlv_now.json";
+import useCurrentLocation from "hooks/useCurrentLocation";
+
+import TLV_NOW from "mock/tlvCurrentConditionsResult.json";
+import TLV_FORECAST_MOCK from "mock/tlvForecastResult.json";
+import AUTOCOMPLE_T from "mock/autoCompleteTResult.json";
+import GEO_LOC_RESULT from "mock/geoLocationResult.json";
+
 export const useFetchMultipleCurrentConditions = locationKeysArray => {
   return useQueries(
     locationKeysArray.map(key => {
@@ -30,7 +34,7 @@ export const useGetCurrectConditions = locationKey => {
   });
 };
 
-export const useFetchFiveDaysForecast = (locationKey, metric = true) => {
+export const useFetchForecast = (locationKey, metric = true) => {
   return useQuery(
     [...QUERY_KEYS.ACCU_FORECAST, locationKey],
     () => _fetch(QUERY_KEYS.ACCU_FORECAST, URLs.getFiveDayForcastURL(locationKey, metric)),
@@ -42,10 +46,11 @@ export const useFetchFiveDaysForecast = (locationKey, metric = true) => {
   );
 };
 
-export const useFetchSearchByCity = cityName => {
+export const useFetchAutocomplete = cityName => {
   return useQuery([...QUERY_KEYS.ACCU_SEARCH, cityName], () => _fetch(QUERY_KEYS.ACCU_SEARCH, URLs.getAutoCompleteURL(cityName)), {
     ...defaultQuerySettings,
     enabled: cityName !== "" && cityName.length > 2,
+    initialData: USE_MOCK ? AUTOCOMPLE_T : undefined,
   });
 };
 
@@ -59,6 +64,7 @@ export const useSetDefaultLocationByGEO = () => {
     {
       ...defaultQuerySettings,
       enabled: !!location.latitude && !!location.longitude,
+      initialData: USE_MOCK ? GEO_LOC_RESULT : null,
     }
   );
   useEffect(() => {
@@ -77,13 +83,18 @@ export const useSetDefaultLocationByGEO = () => {
 };
 
 export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) => {
-  const { data: place } = useQuery(
+  const { data: place, isSuccess } = useQuery(
     [...QUERY_KEYS.GOOGLE_PLACE, cityName, countryName],
     () => _fetch(QUERY_KEYS.GOOGLE_PLACE, URLs.getGooglePlacesURL(cityName + " " + countryName)),
     defaultQuerySettings
   );
+  const [photoRef, setPhotoRef] = useState(null);
 
-  const photoRef = place?.candidates[0]?.photos[0].photo_reference;
+  useEffect(() => {
+    const candidate = place?.candidates[0];
+    if (candidate?.photos) if (candidate.photos.length > 0) setPhotoRef(candidate.photos[0].photo_reference);
+  }, [isSuccess, place]);
+
   const queryResult = useQuery(
     [...QUERY_KEYS.GOOGLE_PHOTO, cityName, countryName, maxWidth],
     () => _fetch(QUERY_KEYS.GOOGLE_PHOTO, URLs.getGooglePlacePhotoURL(photoRef, maxWidth)),

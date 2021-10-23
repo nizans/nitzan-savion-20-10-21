@@ -14,7 +14,7 @@ export const _fetch = async (queryKey, url, options = defaultRequestOptions) => 
     }
     throw new QueryError(queryKey, "Error while fetching data...");
   }
-  if (response.headers.get("Content-Type") === "image/jpeg") return await response.blob();
+  if (response.headers.get("Content-Type").split("/")[0] === "image") return await response.blob();
   if (response.status === 204) return;
   return await response.json();
 };
