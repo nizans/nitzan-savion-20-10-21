@@ -1,44 +1,75 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Weather App
 
-## Available Scripts
+A React weather app, using [AccuWeather](https://developer.accuweather.com/) api.
 
-In the project directory, you can run:
+Preview: [https://nizans.github.io/weather-app/](https://nizans.github.io/weather-app/)
 
-### `npm start`
+### **Local Installation**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clone the repo, run `npm install`, provide env vars:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+REACT_APP_ACCU_API_KEY=<apikey>
+REACT_APP_GOOGLE_API_KEY=<apikey>
+REACT_APP_PROXY_SERVER_PREFIX=<proxy-server-url - optional>
+REACT_APP_USE_MOCK=<'true' - optional>
+```
 
-### `npm test`
+and run `npm start`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **Explanations**
 
-### `npm run build`
+<details>
+<summary>
+    React Query    
+</summary>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+React Query makes all the API requests in the app, using a custom hook that wraps the useQuery hook for each request. The hooks are located in the [query.hooks.js](https://github.com/nizans/weather-app/blob/main/src/lib/reactQuery/query.hooks.js) file.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Some of the hooks are doing extra logic, for example:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [useFetchLocationPhoto](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/lib/reactQuery/query.hooks.js#L85) - gets the location name, then uses it to get the location photo
+- [useSetDefaultLocationByGEO](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/lib/reactQuery/query.hooks.js#L57) - gets the location and then updates the [defaultLocation](https://github.com/nizans/weather-app/blob/main/src/features/fiveDayForecast/defaultLocation.slice.js) state
 
-### `npm run eject`
+The queries use the custom [\_fetch](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/lib/reactQuery/query.function.js#L8) function, which wraps the fetch API.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The hooks pass the errors the may occur to the [queryErrorHandler](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/lib/reactQuery/query.error.js#L17) by default.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Query keys are defined in the [query.keys.js](https://github.com/nizans/weather-app/blob/main/src/lib/reactQuery/query.keys.js) file.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+</details>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<details>
+<summary>
+Redux
+</summary>
 
-## Learn More
+Redux manages the app state, which includes the [theme](https://github.com/nizans/weather-app/blob/main/src/features/theme/theme.slice.js), [favorites](https://github.com/nizans/weather-app/blob/main/src/features/favorites/Favorites.slice.js), [defaultLocation](https://github.com/nizans/weather-app/blob/main/src/features/fiveDayForecast/defaultLocation.slice.js), and [notifications](https://github.com/nizans/weather-app/blob/main/src/features/notifications/notifications.slice.js).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A [subscriber](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/store/store.js#L18) persists the theme and favorites data to local storage, which the store tries to load when initiated.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Examples:
+
+- The app [fires](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/features/notifications/Notifications.js#L25) a toast when a [notification object](https://github.com/nizans/weather-app/blob/main/src/features/notifications/notifications.model.js) is added to the notifications array and dismisses it when removed (e.g., [addNotification](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/features/searchInput/SearchInput.js#L22)).
+
+- The app home page shows the [weather forecast](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/features/fiveDayForecast/FiveDayForecastWrapper.js#L12) of the current [defaultLocation](https://github.com/nizans/weather-app/blob/main/src/features/fiveDayForecast/defaultLocation.slice.js)
+
+</details>
+
+<details>
+<summary>
+Why did I used a proxy server ?
+</summary>
+
+During development, I ran into some CORS issues while fetching from Google API and found this [quick fix](https://github.com/Rob--W/cors-anywhere/).
+
+</details>
+
+### **Technologies and Libraries**
+
+- React
+- React-Router
+- Tailwindcss & Headless UI - design and UI components
+- Redux & Redux Toolkit - state management
+- React Query - handles all API requests
+- [react-icons](https://react-icons.github.io/react-icons/)
