@@ -20,7 +20,8 @@ const FavoriteButton = ({ locationKey = null, cityName = "", countryName = "", s
   const dispatch = useDispatch();
   const isFavorite = useCheckIsFavorite(locationKey);
 
-  const handleClick = () => {
+  const handleClick = e => {
+    e.stopPropagation();
     if (!locationKey) return;
     if (!isFavorite) handleAdd();
     else handleRemove();
@@ -49,7 +50,7 @@ const FavoriteButton = ({ locationKey = null, cityName = "", countryName = "", s
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <button className="absolute" onClick={handleClick} {...props}>
+        <button className="absolute" onClick={e => handleClick(e)} {...props}>
           <MdFavorite size={size} color={color} />
         </button>
       </Transition>

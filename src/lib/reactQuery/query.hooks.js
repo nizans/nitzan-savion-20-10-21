@@ -7,12 +7,15 @@ import { useEffect } from "react";
 import { useQueries, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import useCurrentLocation from "hooks/useCurrentLocation";
-
+import TLV_FORECAST_MOCK from "mock/tlv_forecast.json";
+import { USE_MOCK } from "constants/vars";
+import TLV_NOW from "mock/tlv_now.json";
 export const useFetchMultipleCurrentConditions = locationKeysArray => {
   return useQueries(
     locationKeysArray.map(key => {
       return {
         ...defaultQuerySettings,
+        initialData: USE_MOCK ? TLV_NOW : undefined,
         queryKey: [...QUERY_KEYS.ACCU_CONDOTIONS, key],
         queryFn: () => _fetch(QUERY_KEYS.ACCU_CONDOTIONS, URLs.getCurrentConditionsURL(key)),
       };
@@ -34,6 +37,7 @@ export const useFetchFiveDaysForecast = (locationKey, metric = true) => {
     {
       ...defaultQuerySettings,
       enabled: !!locationKey,
+      initialData: USE_MOCK ? TLV_FORECAST_MOCK : undefined,
     }
   );
 };
@@ -81,7 +85,7 @@ export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) =>
 
   const photoRef = place?.candidates[0]?.photos[0].photo_reference;
   const queryResult = useQuery(
-    [...QUERY_KEYS.GOOGLE_PHOTO, cityName, countryName],
+    [...QUERY_KEYS.GOOGLE_PHOTO, cityName, countryName, maxWidth],
     () => _fetch(QUERY_KEYS.GOOGLE_PHOTO, URLs.getGooglePlacePhotoURL(photoRef, maxWidth)),
     {
       ...defaultQuerySettings,

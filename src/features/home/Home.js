@@ -10,7 +10,7 @@ import parseImageToSrc from "utils/imageFromBlob";
 const Home = () => {
   const { dark } = useSelector(selectTheme);
   const { cityName, countryName } = useSelector(selectDefaultLocation);
-  const { data: imageBlob, isSuccess, isLoading } = useFetchLocationPhoto(cityName, countryName, 2560);
+  const { data: imageBlob, isSuccess, isLoading } = useFetchLocationPhoto(cityName, countryName);
 
   return (
     <div className="flex flex-col h-full  relative">
