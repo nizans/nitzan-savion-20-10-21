@@ -4,6 +4,7 @@ export const errorNotification = (description, autoDismiss = -1, title = "Error"
   title,
   description,
   autoDismiss,
+  type: "error",
 });
 
 export const infoNotification = (description, autoDismiss = -1, title = "Info") => ({
@@ -12,6 +13,7 @@ export const infoNotification = (description, autoDismiss = -1, title = "Info") 
   title,
   description,
   autoDismiss,
+  type: "info",
 });
 
 export const successNotification = (description, autoDismiss = -1, title = "Success") => ({
@@ -20,4 +22,5 @@ export const successNotification = (description, autoDismiss = -1, title = "Succ
   title,
   description,
   autoDismiss,
+  type: "success",
 });

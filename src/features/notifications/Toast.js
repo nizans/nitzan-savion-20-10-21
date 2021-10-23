@@ -1,19 +1,14 @@
-import React from 'react';
-import { BiErrorAlt, BiInfoCircle, BiCheck } from 'react-icons/bi';
+import React from "react";
+import { BiErrorAlt, BiInfoCircle, BiCheck } from "react-icons/bi";
 
 const Toast = ({ notification, handleDismiss }) => {
-  const Icon =
-    notification.title === 'Error'
-      ? BiErrorAlt
-      : notification.title === 'Info'
-      ? BiInfoCircle
-      : BiCheck;
+  const Icon = notification.type === "error" ? BiErrorAlt : notification.type === "info" ? BiInfoCircle : BiCheck;
   return (
     <div
       style={{
         backgroundColor: notification.backgroundColor,
-        transition: 'transform 1.6s ease-in-out',
-        animation: 'toast-in-right 1.7s',
+        transition: "transform 1.6s ease-in-out",
+        animation: "toast-in-right 1.7s",
       }}
       className="relative text-sm text-white overflow-hidden mb-1 pl-5 pr-4 py-3 rounded shadow-lg hover:shadow-2xl opacity-90 hover:opacity-100 cursor-pointer "
     >
@@ -28,9 +23,7 @@ const Toast = ({ notification, handleDismiss }) => {
       </div>
       <div>
         <p className="w-64 h-5 text-xl">{notification.title}</p>
-        <p className="h-8 w-64 text-left text-base m-0 -ml-1 overflow-hidden whitespace-nowrap ">
-          {notification.description}
-        </p>
+        <p className="h-8 w-64 text-left text-base m-0 -ml-1 overflow-hidden whitespace-nowrap ">{notification.description}</p>
       </div>
     </div>
   );
