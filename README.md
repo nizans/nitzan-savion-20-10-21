@@ -2,7 +2,7 @@
 
 A React weather app, using [AccuWeather](https://developer.accuweather.com/) API.
 
-Preview: [https://nizans.github.io/weather-app/](https://nizans.github.io/weather-app/)
+Preview: [https://nizans.github.io/nitzan-savion-20-10-21/](https://nizans.github.io/nitzan-savion-20-10-21/)
 
 ### **Local Installation**
 
