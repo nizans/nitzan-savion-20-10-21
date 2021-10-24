@@ -12,10 +12,9 @@ Clone the repo, run `npm install`, provide env vars:
 REACT_APP_ACCU_API_KEY=<apikey>
 REACT_APP_GOOGLE_API_KEY=<apikey>
 REACT_APP_PROXY_SERVER_PREFIX=<proxy-server-url - optional>
-REACT_APP_USE_MOCK=<'true' - optional>
 ```
 
-and run `npm start`
+Run the app using `npm start` or `npm run start-mock` to run with mock data.
 
 ### **Explanations**
 

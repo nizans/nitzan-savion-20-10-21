@@ -1,45 +1,56 @@
+import { Transition } from "@headlessui/react";
 import { USE_MOCK } from "constants/vars";
-import { infoNotification } from "features/notifications/notifications.model";
-import { addNotification, selectNotification } from "features/notifications/notifications.slice";
+import { setDefaultLocation } from "features/fiveDayForecast/defaultLocation.slice";
 import Spinner from "features/UI/Spinner";
 import useDebounce from "hooks/useDebounce";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import { useFetchAutocomplete } from "lib/reactQuery/query.hooks";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSearchInputValue } from "./SearchInput.hooks";
 import SearchInputSuggestions from "./SearchInputSuggestions";
 
 const SearchInput = () => {
-  const notifications = useSelector(selectNotification);
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
-  const debouncedValue = useDebounce(value, 300);
-  const { data, isLoading, isSuccess } = useFetchAutocomplete(debouncedValue);
+  const [searchValue, setSearchValue] = useSearchInputValue();
+  const debouncedValue = useDebounce(searchValue, 300);
+  const { data, isLoading, remove } = useFetchAutocomplete(debouncedValue);
   const { width: windowWidth } = useWindowDimensions();
+  const [showSuggestions, setShowSuggestions] = useState(USE_MOCK ? searchValue.length > 2 : data?.length > 0);
 
-  const handleInvalidInput = () => {
-    if (!notifications.some(notf => notf.title === "Invalid input"))
-      dispatch(addNotification(infoNotification("Only english characters allowed", 5000, "Invalid input")));
-  };
-  const handleChange = input => {
-    if (/[^A-Za-z]/gi.test(input)) handleInvalidInput();
-    input = input.replace(/[^A-Za-z]/gi, "");
-    setValue(input);
+  useEffect(() => {
+    if ((USE_MOCK && searchValue.length > 2) || (!USE_MOCK && data?.length > 0)) setShowSuggestions(true);
+    else setShowSuggestions(false);
+  }, [searchValue, data]);
+
+  const handleSelectItem = (key, cityName, countryName) => {
+    dispatch(setDefaultLocation({ key, cityName, countryName }));
+    setSearchValue("");
+    remove();
   };
 
   return (
     <div className="flex border-2 border-primary rounded-md w-full max-w-xl xl:max-w-2xl 2xl:max-w-3xl mx-auto relative overflow-hidden">
       <input
         type="text"
-        value={value}
-        onChange={e => handleChange(e.target.value)}
+        value={searchValue}
+        onChange={e => setSearchValue(e.target.value)}
         placeholder="Enter City Name..."
-        className="w-full border-r text-xl xl:text-2xl 2xl:text-4xl pl-2 py-1 outline-none "
+        className="w-full border-r text-xl xl:text-2xl 2xl:text-4xl pl-2 py-1 outline-none"
       />
-      <label></label>
 
-      {USE_MOCK && value.length > 2 && <SearchInputSuggestions data={data} />}
-      {!USE_MOCK && isSuccess && <SearchInputSuggestions data={data} />}
+      <Transition
+        show={showSuggestions}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+        className="fixed mt-9 xl:mt-14 z-30"
+      >
+        <SearchInputSuggestions data={data} handleSelectItem={handleSelectItem} />
+      </Transition>
 
       <span className="p-2 border-l-2 bg-gray-100 border-primary flex items-center">
         <Spinner

@@ -1,18 +1,13 @@
 import URLs from "constants/URLs";
-import useTemperatureString from "hooks/useTemperatureString";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import React from "react";
 import checkIfDayTime from "utils/checkIfDayTime";
+import { useGetSingleDayTemps } from "./SingleDayCard.hooks";
+
 const SingleDayCard = ({ weatherData, day }) => {
   const isDayTime = checkIfDayTime(weatherData.Sun.Rise, weatherData.Sun.Set);
   const { width: windowWidth } = useWindowDimensions();
-
-  const { Temperature: temp, RealFeelTemperature: feelsLike } = weatherData;
-
-  const [minTempStr] = useTemperatureString(temp.Minimum.Value);
-  const [maxTempStr] = useTemperatureString(temp.Maximum.Value);
-  const [feelsLikeMin] = useTemperatureString(feelsLike.Minimum.Value);
-  const [feelsLikeMax] = useTemperatureString(feelsLike.Maximum.Value);
+  const { minTempStr, maxTempStr, feelsLikeMin, feelsLikeMax } = useGetSingleDayTemps(weatherData.Temperature, weatherData.RealFeelTemperature);
 
   let phrase = weatherData.Day.LongPhrase;
   let iconSrc = URLs.getWeatherIconURL(weatherData.Day.Icon);

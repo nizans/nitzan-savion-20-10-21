@@ -14,18 +14,22 @@ const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
   const dispatch = useDispatch();
   const { push } = useHistory();
 
-  const handleClick = e => {
+  const handleClick = () => {
     dispatch(setDefaultLocation({ key: locationKey, cityName, countryName }));
     push(ROUTE_PREFIX);
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: isSuccess && "url(" + parseImageToSrc(imageBlob) + ")",
-      }}
-      className="w-56 h-80 border rounded-md border-dark-lighter dark:bg-light-darker bg-cover relative"
-    >
+    <div className="relative w-56 h-80 border rounded-md border-dark-lighter dark:bg-light-darker">
+      <div className="overflow-hidden">
+        <div
+          style={{
+            backgroundImage: isSuccess && "url(" + parseImageToSrc(imageBlob) + ")",
+          }}
+          className="bg-cover absolute top-0 left-0 right-0 bottom-0 transorm scale-1.5"
+        ></div>
+      </div>
+
       <div
         className="absolute top-0 left-0 right-0 bottom-0 bg-dark-lighter bg-opacity-50 hover:bg-opacity-20 p-4 text-white cursor-pointer"
         style={{
@@ -33,7 +37,7 @@ const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
         }}
         onClick={e => handleClick(e)}
       >
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col justify-between h-full ">
           <h1>
             {cityName}, {countryName}
           </h1>

@@ -5,7 +5,7 @@ import ThemeButtons from "../theme/ThemeButtons";
 
 const SmallNavbar = ({ navigation }) => {
   return (
-    <Disclosure.Panel  className="md:hidden">
+    <Disclosure.Panel className="md:hidden">
       {({ close }) => (
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navigation.map(item => (
@@ -13,8 +13,8 @@ const SmallNavbar = ({ navigation }) => {
               key={item.to}
               exact={item.exact}
               to={item.to}
-              activeClassName="bg-primary"
-              className="px-3 py-2 rounded-md text-3xl dark:text-white hover:bg-primary flex items-center"
+              activeClassName="bg-primary hover:bg-opacity-100"
+              className="px-3 py-2 rounded-md text-3xl transition-colors duration-150 dark:text-white hover:bg-primary hover:bg-opacity-50 flex items-center"
               onClick={close}
             >
               <span className="mr-4">{item.icon}</span>

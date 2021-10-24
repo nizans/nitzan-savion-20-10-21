@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 
 import Home from "features/home/Home";
 import Favorites from "features/favorites/Favorites";
@@ -15,6 +15,7 @@ const AppRoutes = () => {
       <Route path={ROUTE_PREFIX + "favorites"}>
         <Favorites />
       </Route>
+      <Redirect from="*" to={ROUTE_PREFIX} />
     </Switch>
   );
 };

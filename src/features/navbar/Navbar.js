@@ -33,8 +33,8 @@ const Navbar = () => {
                         <NavLink
                           key={item.to}
                           exact={item.exact}
-                          activeClassName="bg-primary"
-                          className="px-3 py-2 rounded-md dark:text-white hover:bg-primary flex items-center"
+                          activeClassName="bg-primary hover:bg-opacity-100"
+                          className="px-3 py-2 rounded-md transition-colors duration-150 dark:text-white hover:bg-primary hover:bg-opacity-50 flex items-center"
                           to={item.to}
                         >
                           {item.icon}

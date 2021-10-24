@@ -17,13 +17,13 @@ const Home = () => {
       <div
         className="absolute top-0 left-0 right-0 bottom-0 bg-cover "
         style={{
-          backgroundImage: isSuccess ? "url(" + parseImageToSrc(imageBlob) + ")" : "url(https://placeimg.com/124/124/nature)",
+          backgroundImage: isSuccess ? "url(" + parseImageToSrc(imageBlob) + ")" : "url(https://placeimg.com/64/64/nature)",
           filter: !isSuccess ? "blur(100px)" : "blur(0px)",
           transition: "1s filter linear",
         }}
       >
         <div
-          className="w-full h-full "
+          className="w-full h-full"
           style={{
             background: dark
               ? `linear-gradient(90deg, rgba(20,33,61,0.9) 0%, rgba(20,33,61,0.5) 30%, rgba(20,33,61,0.5) 70%, rgba(20,33,61,0.9) 100%)`
@@ -31,6 +31,7 @@ const Home = () => {
           }}
         ></div>
       </div>
+
       <div className="px-4 z-10">
         <div className="container mx-auto">
           <span className="flex w-full my-14">
