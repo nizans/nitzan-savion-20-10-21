@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/weather-app/static/css/main.5e32cab9.chunk.css",
-    "main.js": "/weather-app/static/js/main.4bb8cbb9.chunk.js",
-    "main.js.map": "/weather-app/static/js/main.4bb8cbb9.chunk.js.map",
-    "runtime-main.js": "/weather-app/static/js/runtime-main.715bdc0c.js",
-    "runtime-main.js.map": "/weather-app/static/js/runtime-main.715bdc0c.js.map",
-    "static/js/2.744a1e61.chunk.js": "/weather-app/static/js/2.744a1e61.chunk.js",
-    "static/js/2.744a1e61.chunk.js.map": "/weather-app/static/js/2.744a1e61.chunk.js.map",
-    "index.html": "/weather-app/index.html",
-    "static/css/main.5e32cab9.chunk.css.map": "/weather-app/static/css/main.5e32cab9.chunk.css.map",
-    "static/js/2.744a1e61.chunk.js.LICENSE.txt": "/weather-app/static/js/2.744a1e61.chunk.js.LICENSE.txt"
+    "main.css": "/nitzan-savion-20-10-21/static/css/main.5e32cab9.chunk.css",
+    "main.js": "/nitzan-savion-20-10-21/static/js/main.072fc066.chunk.js",
+    "main.js.map": "/nitzan-savion-20-10-21/static/js/main.072fc066.chunk.js.map",
+    "runtime-main.js": "/nitzan-savion-20-10-21/static/js/runtime-main.797fc225.js",
+    "runtime-main.js.map": "/nitzan-savion-20-10-21/static/js/runtime-main.797fc225.js.map",
+    "static/js/2.744a1e61.chunk.js": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js",
+    "static/js/2.744a1e61.chunk.js.map": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js.map",
+    "index.html": "/nitzan-savion-20-10-21/index.html",
+    "static/css/main.5e32cab9.chunk.css.map": "/nitzan-savion-20-10-21/static/css/main.5e32cab9.chunk.css.map",
+    "static/js/2.744a1e61.chunk.js.LICENSE.txt": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.715bdc0c.js",
+    "static/js/runtime-main.797fc225.js",
     "static/js/2.744a1e61.chunk.js",
     "static/css/main.5e32cab9.chunk.css",
-    "static/js/main.4bb8cbb9.chunk.js"
+    "static/js/main.072fc066.chunk.js"
   ]
 }
