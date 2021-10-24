@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from "react-router";
 import Home from "features/home/Home";
 import Favorites from "features/favorites/Favorites";
 
-export const ROUTE_PREFIX = "/weather-app/";
+export const ROUTE_PREFIX = "/nitzan-savion-20-10-21/";
 
 const AppRoutes = () => {
   return (
