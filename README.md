@@ -64,6 +64,17 @@ During development, I ran into some CORS issues while fetching from Google API a
 
 </details>
 
+<details>
+<summary>
+    Project Structure
+</summary>
+
+Most of the code locates inside the [features](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src/features) folder, and each includes all the feature components, hooks, slices, and any other needed code (e.g., [theme](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src/features/theme), [notifications](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src/features/notifications)).
+
+Commonly used files are located in a separate folder inside [src](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src) (e.g., [hooks folder](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src/hooks), [constants folder](https://github.com/nizans/nitzan-savion-20-10-21/tree/main/src/constants)).
+
+</details>
+
 ### **Technologies and Libraries**
 
 - React
