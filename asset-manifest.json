@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/nitzan-savion-20-10-21/static/css/main.5e32cab9.chunk.css",
-    "main.js": "/nitzan-savion-20-10-21/static/js/main.85e6b9f1.chunk.js",
-    "main.js.map": "/nitzan-savion-20-10-21/static/js/main.85e6b9f1.chunk.js.map",
+    "main.css": "/nitzan-savion-20-10-21/static/css/main.2145d31c.chunk.css",
+    "main.js": "/nitzan-savion-20-10-21/static/js/main.527c733f.chunk.js",
+    "main.js.map": "/nitzan-savion-20-10-21/static/js/main.527c733f.chunk.js.map",
     "runtime-main.js": "/nitzan-savion-20-10-21/static/js/runtime-main.797fc225.js",
     "runtime-main.js.map": "/nitzan-savion-20-10-21/static/js/runtime-main.797fc225.js.map",
     "static/js/2.744a1e61.chunk.js": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js",
     "static/js/2.744a1e61.chunk.js.map": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js.map",
     "index.html": "/nitzan-savion-20-10-21/index.html",
-    "static/css/main.5e32cab9.chunk.css.map": "/nitzan-savion-20-10-21/static/css/main.5e32cab9.chunk.css.map",
+    "static/css/main.2145d31c.chunk.css.map": "/nitzan-savion-20-10-21/static/css/main.2145d31c.chunk.css.map",
     "static/js/2.744a1e61.chunk.js.LICENSE.txt": "/nitzan-savion-20-10-21/static/js/2.744a1e61.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.797fc225.js",
     "static/js/2.744a1e61.chunk.js",
-    "static/css/main.5e32cab9.chunk.css",
-    "static/js/main.85e6b9f1.chunk.js"
+    "static/css/main.2145d31c.chunk.css",
+    "static/js/main.527c733f.chunk.js"
   ]
 }
