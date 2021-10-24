@@ -75,7 +75,6 @@ export const useSetDefaultLocationByGEO = () => {
           key: Key,
           cityName: EnglishName,
           countryName: Country.EnglishName,
-          image: null,
         })
       );
     }
