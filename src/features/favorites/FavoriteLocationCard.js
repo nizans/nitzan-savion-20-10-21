@@ -10,7 +10,7 @@ import FavoriteLocationCardInner from "./FavoriteLocationCardInner";
 
 const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
   const { data: locationData, status } = useGetCurrectConditions(locationKey);
-  const { data: imageBlob, isSuccess } = useFetchLocationPhoto(cityName, countryName, 224 * 2);
+  const { data: imageBlob, isSuccess } = useFetchLocationPhoto(cityName, countryName);
   const dispatch = useDispatch();
   const { push } = useHistory();
 

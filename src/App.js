@@ -21,7 +21,7 @@ function App() {
         </div>
       </div>
       {USE_MOCK && (
-        <span className="fixed bottom-0 left-0 right-0 bg-gray-500 text-center">
+        <span className="fixed bottom-0 left-0 right-0 bg-red-500 text-center font-bold text-white text-xl">
           Using mock weather data. Remove USE_MOCK env var to fetch from API.
         </span>
       )}

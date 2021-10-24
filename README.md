@@ -1,6 +1,6 @@
 # Weather App
 
-A React weather app, using [AccuWeather](https://developer.accuweather.com/) api.
+A React weather app, using [AccuWeather](https://developer.accuweather.com/) API.
 
 Preview: [https://nizans.github.io/weather-app/](https://nizans.github.io/weather-app/)
 
@@ -73,3 +73,11 @@ During development, I ran into some CORS issues while fetching from Google API a
 - Redux & Redux Toolkit - state management
 - React Query - handles all API requests
 - [react-icons](https://react-icons.github.io/react-icons/)
+
+### **Bibliography**
+
+- [React Query Docs](https://react-query.tanstack.com/overview)
+- [React Redux Docs](https://react-redux.js.org/tutorials/quick-start)
+- [Redux Toolkit Docs](https://redux-toolkit.js.org/introduction/getting-started)
+- [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview)
+- [AccuWeather API](https://developer.accuweather.com/apis)

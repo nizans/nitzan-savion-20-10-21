@@ -12,7 +12,7 @@ ReactDOM.render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <App />
-        <ReactQueryDevtools />
+        <ReactQueryDevtools panelProps={{ style: { fontSize: "18px" } }} />
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>,

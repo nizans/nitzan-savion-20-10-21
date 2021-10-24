@@ -83,20 +83,16 @@ export const useSetDefaultLocationByGEO = () => {
 };
 
 export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) => {
-  const { data: place, isSuccess } = useQuery(
+  const [photoRef, setPhotoRef] = useState(null);
+
+  const { data: placeInfo } = useQuery(
     [...QUERY_KEYS.GOOGLE_PLACE, cityName, countryName],
     () => _fetch(QUERY_KEYS.GOOGLE_PLACE, URLs.getGooglePlacesURL(cityName + " " + countryName)),
     defaultQuerySettings
   );
-  const [photoRef, setPhotoRef] = useState(null);
 
-  useEffect(() => {
-    const candidate = place?.candidates[0];
-    if (candidate?.photos) if (candidate.photos.length > 0) setPhotoRef(candidate.photos[0].photo_reference);
-  }, [isSuccess, place]);
-
-  const queryResult = useQuery(
-    [...QUERY_KEYS.GOOGLE_PHOTO, cityName, countryName, maxWidth],
+  const placePhotoQuery = useQuery(
+    [...QUERY_KEYS.GOOGLE_PHOTO, cityName, countryName],
     () => _fetch(QUERY_KEYS.GOOGLE_PHOTO, URLs.getGooglePlacePhotoURL(photoRef, maxWidth)),
     {
       ...defaultQuerySettings,
@@ -104,5 +100,13 @@ export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) =>
     }
   );
 
-  return queryResult;
+  useEffect(() => {
+    const candidate = placeInfo?.candidates[0];
+    if (candidate?.photos) if (candidate.photos.length > 0) setPhotoRef(candidate.photos[0].photo_reference);
+    if (placeInfo?.status === "ZERO_RESULTS") {
+      placePhotoQuery.remove();
+    }
+  }, [placeInfo, placePhotoQuery]);
+
+  return placePhotoQuery;
 };
