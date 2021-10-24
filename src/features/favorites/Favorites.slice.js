@@ -3,10 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "favorites",
   initialState: {
-    items: [
-      { key: 246100, cityName: "Tepic", countryName: "Mexico" },
-      { key: 215854, cityName: "Tel Aviv", countryName: "Israel" },
-    ],
+    items: [],
   },
   reducers: {
     addFavorite: (state, action) => {
