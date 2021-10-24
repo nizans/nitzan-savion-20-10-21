@@ -2,7 +2,7 @@
   "name": "herolo-weather-task",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://nizans.github.io/weather-app",
+  "homepage": "http://nizans.github.io/nitzan-savion-20-10-21",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@headlessui/react": "^1.4.1",
