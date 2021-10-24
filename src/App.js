@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Navbar />
       <div className="w-full flex bg-light dark:bg-dark-lighter">
-        <div style={{ minHeight: "calc(100vh - 64px)" }} className="w-full mx-auto">
+        <div style={{ minHeight: "calc(100vh - 64px)" }} className="w-full mx-auto pb-16">
           <AppRoutes />
           <Notifications />
         </div>

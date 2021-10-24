@@ -20,7 +20,7 @@ const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
   };
 
   return (
-    <div className="relative w-56 h-80 border rounded-md border-dark-lighter dark:bg-light-darker">
+    <div className="relative w-56 h-80 border rounded-md border-dark-lighter dark:border-light-darker overflow-hidden">
       <div className="overflow-hidden">
         <div
           style={{
@@ -31,15 +31,16 @@ const FavoriteLocationCard = ({ cityName, countryName, locationKey }) => {
       </div>
 
       <div
-        className="absolute top-0 left-0 right-0 bottom-0 bg-dark-lighter bg-opacity-50 hover:bg-opacity-20 p-4 text-white cursor-pointer"
+        className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 hover:bg-opacity-20 p-4 text-white cursor-pointer"
         style={{
-          transition: "background .3s ease-out",
+          transition: "background .5s ease-out",
         }}
         onClick={e => handleClick(e)}
       >
         <div className="flex flex-col justify-between h-full ">
           <h1>
-            {cityName}, {countryName}
+            {cityName},<br />
+            {countryName}
           </h1>
           <FavoriteButton locationKey={locationKey} cityName={cityName} countryName={countryName} className="absolute right-2 top-2 z-10" />
           {status === "success" && <FavoriteLocationCardInner locationData={locationData[0]} cityName={cityName} countryName={countryName} />}

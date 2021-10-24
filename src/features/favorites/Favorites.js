@@ -9,7 +9,12 @@ const Favorites = () => {
 
   useFetchMultipleCurrentConditions(favorites.map(fav => fav.key));
 
-  if (favorites.length === 0) return <h1>No favorites</h1>;
+  if (favorites.length === 0)
+    return (
+      <div className="w-full h-full m-auto container flex justify-center items-center">
+        <h1 className="text-3xl text-black dark:text-white text-center">You don't have any favorite locations yet.🤷🏻‍♂️</h1>
+      </div>
+    );
   return (
     <div className=" mx-auto container py-14 px-2 ">
       <div className="font-bold text-black dark:text-white text-2xl xl:text-2xl 2xl:text-3xl">My Favorites Locations:</div>
