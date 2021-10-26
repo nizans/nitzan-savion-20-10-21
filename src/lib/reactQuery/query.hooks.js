@@ -83,7 +83,7 @@ export const useSetDefaultLocationByGEO = () => {
 
 export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) => {
   const [photoRef, setPhotoRef] = useState(null);
-
+  const [enableQuery, setEnableQuery] = useState(false);
   const { data: placeInfo } = useQuery(
     [...QUERY_KEYS.GOOGLE_PLACE, cityName, countryName],
     () => _fetch(QUERY_KEYS.GOOGLE_PLACE, URLs.getGooglePlacesURL(cityName + " " + countryName)),
@@ -95,17 +95,21 @@ export const useFetchLocationPhoto = (cityName, countryName, maxWidth = 3840) =>
     () => _fetch(QUERY_KEYS.GOOGLE_PHOTO, URLs.getGooglePlacePhotoURL(photoRef, maxWidth)),
     {
       ...defaultQuerySettings,
-      enabled: !!photoRef,
+      enabled: enableQuery,
     }
   );
 
   useEffect(() => {
+    setEnableQuery(false);
     const candidate = placeInfo?.candidates[0];
-    if (candidate?.photos) if (candidate.photos.length > 0) setPhotoRef(candidate.photos[0].photo_reference);
+    if (candidate?.photos)
+      if (candidate.photos.length > 0 && photoRef !== candidate.photos[0].photo_reference) {
+        setPhotoRef(candidate.photos[0].photo_reference);
+        setEnableQuery(true);
+      }
     if (placeInfo?.status === "ZERO_RESULTS") {
-      placePhotoQuery.remove();
     }
-  }, [placeInfo, placePhotoQuery]);
+  }, [placeInfo, placePhotoQuery, photoRef]);
 
   return placePhotoQuery;
 };

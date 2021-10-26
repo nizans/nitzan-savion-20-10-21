@@ -12,6 +12,8 @@ const Home = () => {
   const { cityName, countryName } = useSelector(selectDefaultLocation);
   const { data: imageBlob, isSuccess } = useFetchLocationPhoto(cityName, countryName);
 
+    
+
   return (
     <div className="flex flex-col h-full  relative">
       <div
