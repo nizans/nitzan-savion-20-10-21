@@ -84,7 +84,7 @@ Commonly used files are located in a separate folder inside [src](https://github
 
 - React
 - React-Router
-- Tailwindcss & Headless UI - design and UI components
+- [Tailwindcss](https://tailwindcss.com/) & [Headless UI](https://headlessui.dev/) - design and UI components
 - Redux & Redux Toolkit - state management
 - React Query - handles all API requests
 - [react-icons](https://react-icons.github.io/react-icons/)
