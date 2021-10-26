@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectFavorites } from "./Favorites.slice";
+import { selectFavorites } from "./favorites.slice";
 import FavoriteLocationCard from "features/favorites/FavoriteLocationCard";
 import { useFetchMultipleCurrentConditions } from "lib/reactQuery/query.hooks";
 import Divider from "features/UI/Divider";

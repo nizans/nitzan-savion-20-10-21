@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectFavorites } from "./Favorites.slice";
+import { selectFavorites } from "./favorites.slice";
 
 export const useCheckIsFavorite = (key = null) => {
   const favorites = useSelector(selectFavorites);

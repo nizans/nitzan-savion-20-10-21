@@ -45,6 +45,11 @@ Redux
 
 Redux manages the app state, which includes the [theme](https://github.com/nizans/weather-app/blob/main/src/features/theme/theme.slice.js), [favorites](https://github.com/nizans/weather-app/blob/main/src/features/favorites/Favorites.slice.js), [defaultLocation](https://github.com/nizans/weather-app/blob/main/src/features/fiveDayForecast/defaultLocation.slice.js), and [notifications](https://github.com/nizans/weather-app/blob/main/src/features/notifications/notifications.slice.js).
 
+The app 'listens' to the redux state and behaves accordingly.
+For example, the [five-day forecast](https://github.com/nizans/nitzan-savion-20-10-21/blob/4726b22d812c18f270b0bc275838b9be249dd4b1/src/features/fiveDayForecast/FiveDayForecastWrapper.js#L12) on the home page will show the forecast of the location that is currently set as the [defaultLocation](https://github.com/nizans/weather-app/blob/main/src/features/fiveDayForecast/defaultLocation.slice.js) state.
+If the defaultLocation state changes to a different location, the homepage will react and show the new location forecast.
+This way, it's easy to set the homepage forecast location from anywhere in the app, like the [favorites page](https://github.com/nizans/nitzan-savion-20-10-21/blob/4726b22d812c18f270b0bc275838b9be249dd4b1/src/features/favorites/FavoriteLocationCard.js#L18), which is the requirement in the assignment.
+
 A [subscriber](https://github.com/nizans/weather-app/blob/a4e7d5cbd1ee68911b2826982d0bb2c14e2c403d/src/store/store.js#L18) persists the theme and favorites data to local storage, which the store tries to load when initiated.
 
 Examples:

@@ -1,7 +1,7 @@
 import { infoNotification, successNotification } from "features/notifications/notifications.model";
 import { addNotification } from "features/notifications/notifications.slice";
 import { useDispatch } from "react-redux";
-import { addFavorite, removeFavorite } from "./Favorites.slice";
+import { addFavorite, removeFavorite } from "./favorites.slice";
 
 export const useFavoriteButton = (locationKey, cityName, countryName) => {
   const dispatch = useDispatch();

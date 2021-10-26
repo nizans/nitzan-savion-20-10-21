@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import favoritesSlice from "features/favorites/Favorites.slice";
+import favoritesSlice from "features/favorites/favorites.slice";
 import notificationsSlice from "features/notifications/notifications.slice";
 import themeSlice from "features/theme/theme.slice";
 import storage from "utils/storage";
