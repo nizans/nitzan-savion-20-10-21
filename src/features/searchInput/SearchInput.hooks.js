@@ -3,6 +3,8 @@ import { addNotification, selectNotification } from "features/notifications/noti
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+const inputRegexPattern = /[^A-Za-z ]/gi;
+
 export const useSearchInputValue = () => {
   const notifications = useSelector(selectNotification);
   const dispatch = useDispatch();
@@ -14,8 +16,8 @@ export const useSearchInputValue = () => {
   };
 
   const handleSearchInputChange = input => {
-    if (/[^A-Za-z]/gi.test(input)) handleInvalidInput();
-    input = input.replace(/[^A-Za-z]/gi, "");
+    if (inputRegexPattern.test(input)) handleInvalidInput();
+    input = input.replace(inputRegexPattern, "");
     setSearchValue(input);
   };
 

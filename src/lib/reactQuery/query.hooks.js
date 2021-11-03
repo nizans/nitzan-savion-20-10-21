@@ -8,7 +8,6 @@ import { useQueries, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import { USE_MOCK } from "constants/vars";
 import useCurrentLocation from "hooks/useCurrentLocation";
-
 import TLV_NOW from "mock/tlvCurrentConditionsResult.json";
 import TLV_FORECAST_MOCK from "mock/tlvForecastResult.json";
 import AUTOCOMPLE_T from "mock/autoCompleteTResult.json";
